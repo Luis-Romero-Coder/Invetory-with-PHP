@@ -7,31 +7,32 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
-    public function Index(){
-        return "todos los productos";
+
+    public function index(){
+        return view("productos.index");
     }
 
-    public function ShowProducto(){
-        return "un solo producto";
+    public function create(){
+        return view("productos.create");
     }
 
-    public function ShowFormularioCrear(){
-        return "formulario";
+    public function store(){
+        return "producto guardado";
     }
 
-    public function CrearProducto(){
-        return "producto creado";
+    public function show($id){
+        return view("productos.show");
     }
 
-    public function ShowFormularioActualizarProducto(){
-        return "formulario para actualizar";
+    public function edit($id){
+        return view("productos.edit");
     }
 
-    public function ActualizarProducto(){
+    public function update($id){
         return "producto actualizado";
     }
 
-    public function BorrarProducto($id) {
+    public function destroy($id) {
         return "producto eliminado";
     }
 }
