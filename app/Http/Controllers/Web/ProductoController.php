@@ -3,24 +3,28 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
 
     public function index(){
-        return view("productos.index");
+        $productos = Producto::paginate(10);
+        return view("productos.index", compact('productos'));
     }
 
     public function create(){
         return view("productos.create");
     }
 
-    public function store(){
-        return "producto guardado";
+    public function store(Request $request){
+        Producto::create($request->all());
+        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
     public function show($id){
+        $productos = Producto::findOrFail($id);
         return view("productos.show");
     }
 

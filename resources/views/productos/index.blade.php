@@ -23,16 +23,19 @@
             </tr>
         </thead>
         <tbody class="divide-y">
-            {{-- Ejemplo estático --}}
-            <tr>
-                <td class="px-4 py-3">1</td>
-                <td class="px-4 py-3">Mouse</td>
-                <td class="px-4 py-3">20</td>
-                <td class="px-4 py-3 text-right space-x-2">
-                    <a href="{{ route('productos.show', 1) }}" class="text-blue-600 hover:underline">Ver</a>
-                    <a href="{{ route('productos.edit', 1) }}" class="text-yellow-600 hover:underline">Editar</a>
-                </td>
-            </tr>
+            @forelse ($productos as $producto)
+                <tr>
+                    <td class="px-4 py-3">{{ $producto->id }}</td>
+                    <td class="px-4 py-3">{{ $producto->nombre }}</td>
+                    <td class="px-4 py-3">{{ $producto->stock }}</td>
+                    <td class="px-4 py-3 text-right space-x-2">
+                        <a href="{{ route('productos.show', $producto->id) }}" class="text-blue-600 hover:underline">Ver</a>
+                        <a href="{{ route('productos.edit', $producto->id) }}" class="text-yellow-600 hover:underline">Editar</a>
+                    </td>
+                </tr>
+            @empty
+
+            @endforelse
         </tbody>
     </table>
 </div>
