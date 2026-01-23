@@ -5,8 +5,19 @@
 @section('content')
 <h2 class="text-2xl font-bold text-slate-800 mb-6">Crear producto</h2>
 
+@if ($errors->any())
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form action="{{route('productos.store')}}" method="POST" class="bg-white p-6 rounded-xl shadow max-w-xl space-y-4">
 
+    @csrf
     <div>
         <label class="block text-sm font-medium text-slate-700">Nombre</label>
         <input type="text" name="nombre" class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
