@@ -22,6 +22,7 @@ class Producto extends Model
     protected $fillable = [
         'nombre',
         'stock',
+        'price',
     ];
 
     // protected $hidden = []; // Ocultar campos en JSON (ej: passwords)

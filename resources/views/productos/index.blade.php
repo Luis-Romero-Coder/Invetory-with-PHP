@@ -32,23 +32,25 @@
         </div>
 
     <table class="w-full">
-        <div class="mt-4">
-            {{ $productos->links() }}
-        </div>
+
         <thead class="bg-slate-100 text-slate-700">
             <tr>
                 <th class="px-4 py-3 text-left">ID</th>
                 <th class="px-4 py-3 text-left">Nombre</th>
                 <th class="px-4 py-3 text-left">Stock</th>
+                <th class="px-4 py-3 text-left">Price</th>
                 <th class="px-4 py-3 text-right">Acciones</th>
             </tr>
+
         </thead>
+
         <tbody class="divide-y">
             @forelse ($productos as $producto)
                 <tr>
                     <td class="px-4 py-3">{{ $producto->id }}</td>
                     <td class="px-4 py-3">{{ $producto->nombre }}</td>
                     <td class="px-4 py-3">{{ $producto->stock }}</td>
+                    <td class="px-4 py-3">{{ $producto->price }}</td>
                     <td class="px-4 py-3 text-right">
                         <div class="flex justify-end gap-3">
 
@@ -71,5 +73,8 @@
             @endforelse
         </tbody>
     </table>
+        <div class="mt-4">
+            {{ $productos->links() }}
+        </div>
 </div>
 @endsection

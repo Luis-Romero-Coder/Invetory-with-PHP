@@ -25,6 +25,7 @@ class ProductoRequest extends FormRequest
         return [
             'nombre' => ['required', 'string', 'max:255', Rule::unique('productos')->ignore($this->producto)],
             'stock' => 'required|integer|min:0',
+            'price' => 'required|float|min:0',
         ];
     }
 }

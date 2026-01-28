@@ -9,6 +9,7 @@
     <p><strong>ID:</strong> {{ $producto->id }}</p>
     <p><strong>Nombre:</strong> {{ $producto->nombre }}</p>
     <p><strong>Stock:</strong> {{ $producto->stock }}</p>
+    <p><strong>Price:</strong> {{ $producto->price }}</p>
 
     <div class="flex justify-end gap-2 pt-4">
         <a href="{{ route('productos.index') }}" class="px-4 py-2 rounded-lg border">Volver</a>
