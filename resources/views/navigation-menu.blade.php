@@ -17,6 +17,10 @@
                     </x-nav-link>
                 </div>
             </div>
+            <x-nav-link href="{{ route('productos.index') }}" :active="request()->routeIs('productos.*')">
+                Inventario
+            </x-nav-link>
+
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <!-- Teams Dropdown -->

@@ -1,7 +1,7 @@
-@extends('welcome')
-@section('title', 'Editar producto')
-
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+        editar producto
+    </x-slot>
 <h2 class="text-2xl font-bold text-slate-800 mb-6">Editar producto</h2>
 @if ($errors->any())
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
@@ -39,4 +39,4 @@
     </div>
 
 </form>
-@endsection
+</x-app-layout>

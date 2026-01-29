@@ -10,16 +10,11 @@
     <nav class="bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-xl font-semibold">Sistema de Inventario</h1>
-            <a href="{{ route('productos.index') }}" class="text-slate-300 hover:text-white transition">
-                Inicio
-            </a>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-10">
-        @yield('content')
-        @hasSection('content')
-            @else
+
                 <div class="flex items-center justify-center">
                     <div class="bg-white shadow-xl rounded-2xl p-10 max-w-2xl text-center">
 
@@ -46,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            
     </main>
 
 </body>
