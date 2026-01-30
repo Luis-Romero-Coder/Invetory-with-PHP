@@ -12,6 +12,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Producto;
 
 class User extends Authenticatable
 {
@@ -25,11 +27,16 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-     /* ================= RELACIONES ================= */
+    /* ================= RELACIONES ================= */
     public function role(): BelongsTo
-{
-    return $this->belongsTo(Role::class);
-}
+    {
+        return $this->belongsTo(Role::class);
+    }
+    public function productos(): HasMany
+    {
+        return $this->hasMany(Producto::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
@@ -37,11 +44,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-    'name',
-    'email',
-    'password',
-    'role_id',
-];
+        'name',
+        'email',
+        'password',
+        'role_id',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -75,5 +82,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function isAdmin(): bool
+    {
+        return $this->role?->name === 'admin';
     }
 }

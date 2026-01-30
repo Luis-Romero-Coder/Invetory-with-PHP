@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 class Producto extends Model
 {
@@ -23,6 +25,7 @@ class Producto extends Model
         'nombre',
         'stock',
         'price',
+        'user_id',
     ];
 
     // protected $hidden = []; // Ocultar campos en JSON (ej: passwords)
@@ -45,7 +48,10 @@ class Producto extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

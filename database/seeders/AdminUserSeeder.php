@@ -17,18 +17,29 @@ class AdminUserSeeder extends Seeder
     {
         $adminRole = Role::where('name', 'admin')->first();
 
-        if (! $adminRole) {
+        if (!$adminRole) {
             $this->command->error('❌ El rol admin no existe.');
             return;
         }
 
-        User::firstOrCreate(
-            ['email' => 'admin@admin.com'],
+        $user = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'Admin',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('admin123456'),
                 'role_id' => $adminRole->id,
             ]
         );
+
+        // Create a personal team for the user if they don't have one
+        if (is_null($user->current_team_id)) {
+            $user->ownedTeams()->save(\App\Models\Team::forceCreate([
+                'user_id' => $user->id,
+                'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+                'personal_team' => true,
+            ]));
+
+            $user->switchTeam($user->ownedTeams()->first());
+        }
     }
 }
