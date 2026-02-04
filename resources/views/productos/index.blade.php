@@ -42,6 +42,7 @@
                         <tr>
                             <th class="px-4 py-3 text-left">ID</th>
                             <th class="px-4 py-3 text-left">Nombre</th>
+                            <th class="px-4 py-3 text-left">Categoría</th>
                             <th class="px-4 py-3 text-left">Stock</th>
                             <th class="px-4 py-3 text-left">Price</th>
                             <th class="px-4 py-3 text-right">Acciones</th>
@@ -53,6 +54,7 @@
                             <tr>
                                 <td class="px-4 py-3">{{ $producto->id }}</td>
                                 <td class="px-4 py-3">{{ $producto->nombre }}</td>
+                                <td class="px-4 py-3">{{ $producto->categoria?->nombre ?? 'Sin categoría' }}</td>
                                 <td class="px-4 py-3">{{ $producto->stock }}</td>
                                 <td class="px-4 py-3">{{ $producto->price }}</td>
                                 <td class="px-4 py-3 text-right">
@@ -78,7 +80,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-6 text-slate-500">
+                                <td colspan="6" class="text-center py-6 text-slate-500">
                                     No hay productos
                                 </td>
                             </tr>

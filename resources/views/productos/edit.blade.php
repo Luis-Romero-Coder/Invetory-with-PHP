@@ -22,6 +22,18 @@
     </div>
 
     <div>
+        <label class="block text-sm font-medium text-slate-700">Categoría</label>
+        <select name="categoria_id" class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
+            <option value="">Selecciona una categoría</option>
+            @foreach ($categorias as $categoria)
+                <option value="{{ $categoria->id }}" @selected(old('categoria_id', $producto->categoria_id) == $categoria->id)>
+                    {{ $categoria->nombre }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    <div>
         <label class="block text-sm font-medium text-slate-700">Stock</label>
         <input type="number" name="stock" value="{{ $producto->stock }}"
                class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">

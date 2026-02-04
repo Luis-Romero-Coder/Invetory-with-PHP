@@ -7,6 +7,7 @@
 <div class="bg-white p-6 rounded-xl shadow max-w-xl space-y-3">
     <p><strong>ID:</strong> {{ $producto->id }}</p>
     <p><strong>Nombre:</strong> {{ $producto->nombre }}</p>
+    <p><strong>Categoría:</strong> {{ $producto->categoria?->nombre ?? 'Sin categoría' }}</p>
     <p><strong>Stock:</strong> {{ $producto->stock }}</p>
     <p><strong>Price:</strong> {{ $producto->price }}</p>
 

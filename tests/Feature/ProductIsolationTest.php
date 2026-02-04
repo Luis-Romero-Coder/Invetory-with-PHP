@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Role;
 use App\Models\User;
@@ -24,9 +25,9 @@ class ProductIsolationTest extends TestCase
         $user2 = User::factory()->withPersonalTeam()->create(['role_id' => $userRole->id]);
 
         // Create products
-        $product1 = Producto::create(['nombre' => 'Product 1', 'stock' => 10, 'price' => 100, 'user_id' => $user1->id]);
-        $product2 = Producto::create(['nombre' => 'Product 2', 'stock' => 5, 'price' => 50, 'user_id' => $user2->id]);
-
+        $categoria = Categoria::factory()->create();
+        $product1 = Producto::create(['nombre' => 'Product 1', 'stock' => 10, 'price' => 100, 'user_id' => $user1->id, 'categoria_id' => $categoria->id]);
+        $product2 = Producto::create(['nombre' => 'Product 2', 'stock' => 5, 'price' => 50, 'user_id' => $user2->id, 'categoria_id' => $categoria->id]);
         // Act as user1
         $response = $this->actingAs($user1)->get(route('productos.index'));
 
@@ -48,9 +49,9 @@ class ProductIsolationTest extends TestCase
         $user2 = User::factory()->withPersonalTeam()->create(['role_id' => $userRole->id]);
 
         // Create products
-        $product1 = Producto::create(['nombre' => 'Product 1', 'stock' => 10, 'price' => 100, 'user_id' => $user1->id]);
-        $product2 = Producto::create(['nombre' => 'Product 2', 'stock' => 5, 'price' => 50, 'user_id' => $user2->id]);
-
+        $categoria = Categoria::factory()->create();
+        $product1 = Producto::create(['nombre' => 'Product 1', 'stock' => 10, 'price' => 100, 'user_id' => $user1->id, 'categoria_id' => $categoria->id]);
+        $product2 = Producto::create(['nombre' => 'Product 2', 'stock' => 5, 'price' => 50, 'user_id' => $user2->id, 'categoria_id' => $categoria->id]);
         // Act as admin
         $response = $this->actingAs($admin)->get(route('productos.index'));
 
