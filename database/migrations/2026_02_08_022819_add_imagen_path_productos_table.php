@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('productos', function (Blueprint $table) {
-            $table->foreignId('categoria_id')
-            ->after('id')
-            ->constrained('categorias')
-            ->restrictOnDelete();
+        Schema::table('productos', function (Blueprint $table){
+            $table->string('imagen_path')->nullable()->after('price');
         });
     }
 
@@ -24,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('productos', function (Blueprint $table) {
-            $table->dropForeign(['categoria_id']);
-            $table->dropColumn('categoria_id');
+        Schema::table('productos', function (Blueprint $table){
+            $table->dropColumn('imagen_path');
         });
     }
 };

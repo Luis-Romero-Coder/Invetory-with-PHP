@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Categoria;
+use Illuminate\Suppert\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -17,6 +19,7 @@ class ProductoController extends Controller
         $user =auth()->user();
 
         $query = $user-> isAdmin() ? Producto::query() : Producto::where('user_id', $user->id);
+        $query -> with('categoria');
 
         if($request->filled('buscar')){
             $buscar = $request->buscar;
@@ -34,15 +37,18 @@ class ProductoController extends Controller
 
         $this ->authorize('create', Producto::class);
 
-        return view("productos.create");
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view("productos.create", compact('categorias'));
     }
 
     public function store(ProductoRequest $request){
 
         $this->authorize('create', Producto::class);
 
-        Producto::create([...$request->validated(), 'user_id' => auth()->id(),]);
+        $data = $request->validated();
+        $data['imagen_path'] = $request->file('imagen')->store('productos','public');
 
+        Producto::create([...$data, 'user_id' => auth()->id(),]);
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
@@ -56,15 +62,26 @@ class ProductoController extends Controller
     public function edit(Producto $producto){
 
         $this->authorize('update', $producto);
-
-        return view("productos.edit", compact('producto'));
+ 
+        $categorias = Categoria::orderBy('nombre')->get();
+        return view("productos.edit", compact('producto', 'categorias'));
     }
 
     public function update(ProductoRequest $request, Producto $producto){
 
         $this->authorize('update', $producto);
 
-        $producto->update($request->validated());
+        $data = $request->validated();
+
+        if($request->hasFile('imagen')){
+            if($producto->imagen_path){
+                Storage::disk('public')->delete($producto->imagen_path);
+            }
+            $data['imagen_path'] = $request->file('imagen')->store('productos','public');
+
+        }
+
+        $producto->update($data);
 
         return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
     }

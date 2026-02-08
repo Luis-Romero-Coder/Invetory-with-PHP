@@ -12,7 +12,7 @@
         </ul>
     </div>
 @endif
-<form action="{{ route('productos.update', $producto->id) }}" method="POST" class="bg-white p-6 rounded-xl shadow max-w-xl space-y-4">
+<form action="{{ route('productos.update', $producto->id) }}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow max-w-xl space-y-4">
     @csrf
     @method('PUT')
     <div>
@@ -43,6 +43,14 @@
         <label class="block text-sm font-medium text-slate-700">Price</label>
         <input type="number" name="price" value="{{ $producto->price }}"
                class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-slate-700">Imagen</label>
+        <input type="file" name="imagen" accept="image/*" class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
+        @if ($producto->imagen_path)
+            <p class="text-xs text-slate-500 mt-1">Imagen actual guardada.</p>
+        @endif
     </div>
 
     <div class="flex justify-end gap-2">

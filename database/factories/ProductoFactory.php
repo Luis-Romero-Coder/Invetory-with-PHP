@@ -13,6 +13,7 @@ use App\Models\User;
 class ProductoFactory extends Factory
 {
     protected $model = Producto::class;
+    
     public function definition(): array
     {
         return [

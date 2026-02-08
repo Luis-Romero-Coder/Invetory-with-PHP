@@ -14,13 +14,15 @@
     </div>
 @endif
 
-<form action="{{route('productos.store')}}" method="POST" class="bg-white p-6 rounded-xl shadow max-w-xl space-y-4">
+<form action="{{route('productos.store')}}" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-xl shadow max-w-xl space-y-4">
 
     @csrf
     <div>
         <label class="block text-sm font-medium text-slate-700">Nombre</label>
         <input type="text" name="nombre" class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
     </div>
+
+    
 
     <div>
         <label class="block text-sm font-medium text-slate-700">Categoría</label>
@@ -42,6 +44,11 @@
     <div>
         <label class="block text-sm font-medium text-slate-700">Price</label>
         <input type="number" name="price" class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-slate-700">Imagen</label>
+        <input type="file" name="imagen" accept="image/*" class="w-full mt-1 rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
     </div>
 
     <div class="flex justify-end gap-2">

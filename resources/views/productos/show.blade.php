@@ -10,6 +10,14 @@
     <p><strong>Categoría:</strong> {{ $producto->categoria?->nombre ?? 'Sin categoría' }}</p>
     <p><strong>Stock:</strong> {{ $producto->stock }}</p>
     <p><strong>Price:</strong> {{ $producto->price }}</p>
+    <div>
+        <strong>Imagen:</strong>
+        @if ($producto->imagen_path)
+            <img src="{{ Storage::url($producto->imagen_path) }}" alt="Imagen de {{ $producto->nombre }}" class="mt-2 h-48 w-48 rounded object-cover">
+        @else
+            <span class="text-slate-500 text-sm">Sin imagen</span>
+        @endif
+    </div>
 
     <div class="flex justify-end gap-2 pt-4">
         <a href="{{ route('productos.index') }}" class="px-4 py-2 rounded-lg border">Volver</a>

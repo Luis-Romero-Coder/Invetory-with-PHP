@@ -45,6 +45,7 @@
                             <th class="px-4 py-3 text-left">Categoría</th>
                             <th class="px-4 py-3 text-left">Stock</th>
                             <th class="px-4 py-3 text-left">Price</th>
+                            <th class="px-4 py-3 text-left">Imagen</th>
                             <th class="px-4 py-3 text-right">Acciones</th>
                         </tr>
                     </thead>
@@ -57,6 +58,13 @@
                                 <td class="px-4 py-3">{{ $producto->categoria?->nombre ?? 'Sin categoría' }}</td>
                                 <td class="px-4 py-3">{{ $producto->stock }}</td>
                                 <td class="px-4 py-3">{{ $producto->price }}</td>
+                                <td class="px-4 py-3">
+                                    @if ($producto->imagen_path)
+                                        <img src="{{ Storage::url($producto->imagen_path) }}" alt="Imagen de {{ $producto->nombre }}" class="h-12 w-12 rounded object-cover">
+                                    @else
+                                        <span class="text-slate-500 text-sm">Sin imagen</span>
+                                    @endif
+                                </td>
                                 <td class="px-4 py-3 text-right">
                                     <div class="flex justify-end gap-3">
                                         <a href="{{ route('productos.show', $producto) }}" class="text-blue-600">
@@ -80,7 +88,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center py-6 text-slate-500">
+                                <td colspan="7" class="text-center py-6 text-slate-500">
                                     No hay productos
                                 </td>
                             </tr>
