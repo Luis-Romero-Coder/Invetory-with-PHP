@@ -27,7 +27,7 @@ class Producto extends Model
         'nombre',
         'stock',
         'price',
-        'imgen_path',
+        'imagen_path',
         'user_id',
     ];
 

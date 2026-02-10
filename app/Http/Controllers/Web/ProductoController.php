@@ -7,7 +7,7 @@ use App\Http\Requests\ProductoRequest;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-use Illuminate\Suppert\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -49,7 +49,7 @@ class ProductoController extends Controller
         $data['imagen_path'] = $request->file('imagen')->store('productos','public');
 
         Producto::create([...$data, 'user_id' => auth()->id(),]);
-        
+
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
