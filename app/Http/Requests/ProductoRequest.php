@@ -22,13 +22,13 @@ class ProductoRequest extends FormRequest
      */
     public function rules(): array
     {
-        $imagenRule = $this->isMethod8('post') ? 'required' : 'nullable';
+        $imagenRule = $this->isMethod('post') ? 'required' : 'nullable';
         return [
             'categoria_id' => ['required', 'integer', 'exists:categorias,id'],
             'nombre' => ['required', 'string', 'max:255', Rule::unique('productos')->ignore($this->producto)],
             'stock' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
-            'imagen' => [$imagenRule, 'image', 'max:2048'],
+            'imagen' => [$imagenRule, 'mimes:jpg,jpeg,png,webp,avif', 'max:2048'],
         ];
     }
 }

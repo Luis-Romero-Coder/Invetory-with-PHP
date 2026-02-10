@@ -49,6 +49,7 @@ class ProductoController extends Controller
         $data['imagen_path'] = $request->file('imagen')->store('productos','public');
 
         Producto::create([...$data, 'user_id' => auth()->id(),]);
+        
         return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
@@ -62,7 +63,7 @@ class ProductoController extends Controller
     public function edit(Producto $producto){
 
         $this->authorize('update', $producto);
- 
+
         $categorias = Categoria::orderBy('nombre')->get();
         return view("productos.edit", compact('producto', 'categorias'));
     }

@@ -12,12 +12,12 @@
                 <h2 class="text-2xl font-bold text-slate-800">Productos</h2>
 
                 <a href="{{ route('productos.create') }}"
-                   class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition">
+                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition">
                     + Nuevo producto
                 </a>
             </div>
 
-            @if(session('success'))
+            @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4">
                     {{ session('success') }}
                 </div>
@@ -25,10 +25,9 @@
 
             <div class="mb-4">
                 <form method="GET" action="{{ route('productos.index') }}" class="flex gap-2 max-w-md">
-                    <input type="text" name="buscar"
-                           value="{{ request('buscar') }}"
-                           placeholder="Buscar por ID o nombre..."
-                           class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
+                    <input type="text" name="buscar" value="{{ request('buscar') }}"
+                        placeholder="Buscar por ID o nombre..."
+                        class="w-full rounded-lg border-slate-300 focus:border-blue-500 focus:ring-blue-500">
 
                     <button class="bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-900">
                         Buscar
@@ -60,7 +59,9 @@
                                 <td class="px-4 py-3">{{ $producto->price }}</td>
                                 <td class="px-4 py-3">
                                     @if ($producto->imagen_path)
-                                        <img src="{{ Storage::url($producto->imagen_path) }}" alt="Imagen de {{ $producto->nombre }}" class="h-12 w-12 rounded object-cover">
+                                        <img src="{{ asset('storage/' . $producto->imagen_path) }}"
+                                            alt="Imagen de {{ $producto->nombre }}"
+                                            class="h-12 w-12 rounded object-cover">
                                     @else
                                         <span class="text-slate-500 text-sm">Sin imagen</span>
                                     @endif
@@ -68,19 +69,19 @@
                                 <td class="px-4 py-3 text-right">
                                     <div class="flex justify-end gap-3">
                                         <a href="{{ route('productos.show', $producto) }}" class="text-blue-600">
-                                            <x-heroicon-s-eye class="w-5 h-5"/>
+                                            <x-heroicon-s-eye class="w-5 h-5" />
                                         </a>
 
                                         <a href="{{ route('productos.edit', $producto) }}" class="text-yellow-600">
-                                            <x-bxs-edit class="w-5 h-5"/>
+                                            <x-bxs-edit class="w-5 h-5" />
                                         </a>
 
                                         <form action="{{ route('productos.destroy', $producto) }}" method="POST"
-                                              onsubmit="return confirm('¿Seguro que deseas eliminar este producto?')">
+                                            onsubmit="return confirm('¿Seguro que deseas eliminar este producto?')">
                                             @csrf
                                             @method('DELETE')
                                             <button class="text-red-600">
-                                                <x-eos-delete class="w-5 h-5"/>
+                                                <x-eos-delete class="w-5 h-5" />
                                             </button>
                                         </form>
                                     </div>
